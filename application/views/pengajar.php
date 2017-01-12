@@ -20,11 +20,16 @@
                                             echo "Data Belum Terisi";
                                           }
                                           else {
+                                           $pesan=$this->session->flashdata('message');
+                                           if ($pesan == "1") {
+                                             echo "<p class='bg-info'>Data Berhasil Ditambahkan</p>";
+                                           }
                                            ?>
                                             <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
                                                 <thead>
                                                 <tr>
                                                     <th>No.</th>
+                                                    <!--<th>Foto</th>-->
                                                     <th>Nama</th>
                                                     <th>Mengajar</th>
                                                     <th>Email</th>
@@ -34,6 +39,7 @@
                                                 </thead>
                                                 <tbody>
                                                   <?php
+                                                        //<td><img src='assets/gambar/$data_dosen->foto' width='100' /></td>
                                                         foreach ($dosen->result() as $data_dosen) {
                                                           echo "<tr>
                                                               <td>$data_dosen->dosen_id</td>
@@ -41,10 +47,7 @@
                                                               <td>$data_dosen->mengajar</td>
                                                               <td>$data_dosen->email</td>
                                                               <td>$data_dosen->status</td>
-                                                              <td><a data-toggle='modal' data-original-title='Help' data-placement='bottom'
-                                                                 href='#edit' class='btn btn-info btn-sm'>  <i class='glyphicon glyphicon-edit'></i>&nbsp;Edit</a>&nbsp;
-                                                                <a data-toggle='modal' data-original-title='Help' data-placement='bottom'
-                                                                   href='#lihat' class='btn btn-warning btn-sm'>  <i class='glyphicon glyphicon-eye-open'></i>&nbsp;Lihat</a></td>
+                                                              <td><a href='href='Pengajar/lihat_pengajar/$data_dosen->dosen_id'' class='btn btn-warning btn-sm'>  <i class='glyphicon glyphicon-eye-open'></i>&nbsp;Lihat</a></td>
                                                           </tr>";
                                                         }// akhir menampilkan data dosen
                                                    ?>

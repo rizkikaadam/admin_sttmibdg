@@ -62,77 +62,95 @@
         </div>
         <div class="modal-body">
             <p>
-              <form class="form-horizontal">
+              <form class="form-horizontal" method="post" action="<?= base_url() ?>Pengajar/tambah_proses" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Nama</label>
+
+                    <div class="col-lg-8">
+                        <input type="text" id="text1" placeholder="Nama"  name="dosen_name" class="form-control">
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Tempat Lahir</label>
+
+                    <div class="col-lg-8">
+                        <input type="text" id="text1" placeholder="Tempat Lahir" name="tmpt_lahir" class="form-control">
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Tanggal Lahir</label>
+
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" data-mask="99/99/9999" name="tgl_lahir">
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Pendidikan Terakhir</label>
+
+                    <div class="col-lg-8">
+                        <input type="text" id="text1" placeholder="Pendidikan Terakhir"  name="pendidikan" class="form-control">
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Mengajar</label>
+
+                    <div class="col-lg-8">
+                        <textarea class="form-control" name="mengajar"></textarea>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Status</label>
+
+                    <div class="col-lg-8">
+                        <select class="form-control" name="status">
+                            <option value="tetap">Dosen Tetap</option>
+                            <option value="luar biasa">Dosen Luar Biasa</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- /.form-group -->
 
                   <div class="form-group">
-                      <label for="text1" class="control-label col-lg-4">Normal Input Field</label>
+                      <label for="text1" class="control-label col-lg-4">Email</label>
 
                       <div class="col-lg-8">
-                          <input type="text" id="text1" placeholder="Email" class="form-control">
+                          <input type="text" id="text1" placeholder="Email" name="email" class="form-control">
                       </div>
                   </div>
                   <!-- /.form-group -->
 
                   <div class="form-group">
-                      <label for="pass1" class="control-label col-lg-4">Password Field</label>
+                      <label for="text1" class="control-label col-lg-4">Foto</label>
 
                       <div class="col-lg-8">
-                          <input class="form-control" type="password" id="pass1"
-                                 data-original-title="Please use your secure password" data-placement="top"/>
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                          <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                          <div>
+                            <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="foto"></span>
+                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                          </div>
+                              </div>
                       </div>
                   </div>
+                  <button type="submit" name="btn simpan" class="btn btn-primary">Simpan</button>
+
                   <!-- /.form-group -->
-
-                  <div class="form-group">
-                      <label for="text2" class="control-label col-lg-4">With Placeholder</label>
-
-                      <div class="col-lg-8">
-                          <input type="text" id="text2" placeholder="placeholder text" class="form-control">
-                      </div>
-                  </div>
+              </form>
                   <!-- /.form-group -->
-
-                  <div class="form-group">
-                      <label for="limiter" class="control-label col-lg-4">Input limiter</label>
-
-                      <div class="col-lg-8">
-                          <textarea id="limiter" class="form-control"></textarea>
-                      </div>
-                  </div>
-                  <!-- /.row -->
-
-                  <div class="form-group">
-                      <label for="text4" class="control-label col-lg-4">Default Textarea</label>
-
-                      <div class="col-lg-8">
-                          <textarea id="text4" class="form-control"></textarea>
-                      </div>
-                  </div>
-                  <!-- /.form-group -->
-
-                  <div class="form-group">
-                      <label for="autosize" class="control-label col-lg-4">Textarea With Autosize</label>
-
-                      <div class="col-lg-8">
-                          <textarea id="autosize" class="form-control"></textarea>
-                      </div>
-                  </div>
-                  <!-- /.form-group -->
-
-                  <div class="form-group">
-                      <label for="tags" class="control-label col-lg-4">Tags</label>
-
-                      <div class="col-lg-8">
-                          <input name="tags" id="tags" value="foo,bar,baz" class="form-control">
-                      </div>
-                  </div>
             </p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button>
 
-            <!-- /.form-group -->
-        </form>
         </div>
     </div>
     <!-- /.modal-content -->

@@ -18,9 +18,14 @@ class pengajar_model extends CI_Model
 		return $this->db->get();
 	}
 
-	function edit()
+	function tambahpengajar_proses($data)
 	{
-		$this->db->where('pengajar_id', 1); //Akan melakukan select terhadap row yang memiliki productId sesuai dengan productId yang telah dipilih
+		$this->db->insert('tbl_dosen', $data);
+	}
+
+	function lihat_pengajar($dosen_id)
+	{
+		$this->db->where('dosen_id', $dosen_id); //Akan melakukan select terhadap row yang memiliki productId sesuai dengan productId yang telah dipilih
     $this->db->select("*");
     $this->db->from("tbl_dosen");
 

@@ -20,6 +20,52 @@ class Pengajar extends CI_Controller {
 		$this->load->view('modal_pengajar.php');
 		$this->load->view('bawah.php');
 	}
+
+	public function tambah_proses()
+	{
+		$this->load->library('upload');
+		$config['upload_path']          = './assets/gambar/'; //path folder
+		$config['allowed_types']        = 'gif|jpg|png|jpeg|bmp';
+		$config['max_size']             = 2048;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+		//$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		$this->upload->initialize($config);
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('foto')){
+			$error = array('error' => $this->upload->display_errors());
+			$this->load->view('pengajar', $error);
+		}else{
+			$gbr = $this->upload->data();
+			$data = array(
+				'foto' =>$gbr['file_name'],
+				'dosen_nama' => $this->input->post('dosen_name'),
+				'tgl_lahir' => $this->input->post('tgl_lahir'),
+				'tmpt_lahir' => $this->input->post('tmpt_lahir'),
+				'pendidikan' => $this->input->post('pendidikan'),
+				'mengajar' => $this->input->post('mengajar'),
+				'status' => $this->input->post('status'),
+				//'password' => $this->input->post('password'),
+				'email' => $this->input->post('email')
+			);
+				$this->pengajar_model->tambahpengajar_proses($data); //passing variable $data ke products_model
+
+				$this->session->set_flashdata('message', '1');
+				redirect('pengajar'); //redirect page ke halaman utama controller products
+		}
+	}
+
+	public function lihat_pengajar($dosen_id)
+	{
+		$this->load->view('header.php');
+		$this->load->view('top.php');
+		$this->load->view('left.php');
+		$data['dosen'] = $this->pengajar_model->lihat_pengajar($dosen_id);
+		$this->load->view('lihat_pengajar.php',$data);
+		$this->load->view('bawah.php');
+	}
 	/*
 
 	public function edit_profil()
