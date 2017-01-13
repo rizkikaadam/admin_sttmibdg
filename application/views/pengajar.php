@@ -47,7 +47,7 @@
                                                               <td>$data_dosen->mengajar</td>
                                                               <td>$data_dosen->email</td>
                                                               <td>$data_dosen->status</td>
-                                                              <td><a href='href='Pengajar/lihat_pengajar/$data_dosen->dosen_id'' class='btn btn-warning btn-sm'>  <i class='glyphicon glyphicon-eye-open'></i>&nbsp;Lihat</a></td>
+                                                              <td><a href='Pengajar/lihat_pengajar/$data_dosen->dosen_id' class='btn btn-warning btn-sm'>  <i class='glyphicon glyphicon-eye-open'></i>&nbsp;Lihat</a></td>
                                                           </tr>";
                                                         }// akhir menampilkan data dosen
                                                    ?>

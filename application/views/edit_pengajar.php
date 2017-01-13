@@ -3,29 +3,91 @@
         <div class="inner bg-light lter">
             <!-- table -->
             <div class="row">
-                        <?php
-                              //<td><img src='assets/gambar/$data_dosen->foto' width='100' /></td>
-                              foreach ($dosen->result() as $data_dosen) {
-                                    /*$data_dosen->dosen_id
-                                    $data_dosen->dosen_nama
-                                    $data_dosen->mengajar
-                                    $data_dosen->email
-                                    $data_dosen->status*/
-                                    $foto=$data_dosen->foto;
-
-                              }// akhir menampilkan data dosen
-                         ?>
               <div class="col-lg-12">
                     <div class="box">
                         <header>
                             <div class="icons"><i class="glyphicon glyphicon-list"></i></div>
-                            <h5><i class="glyphicon glyphicon-user"></i>&nbsp;Data Pengajar</h5>
-                            <div class="toolbar">
-                              <a data-toggle="modal" data-original-title="Help" data-placement="bottom"
-                                 href="<?= base_url() ?>Profil/edit_pengjar" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> Edit Data Dosen</a>
-                            </div>
+                            <h5><i class="glyphicon glyphicon-user"></i>&nbsp;Edit Data Pengajar</h5>
                         </header>
                         <div id="collapse4" class="body">
+                          <?php
+                          foreach ($dosen->result() as $data_dosen) {
+                           ?>
+                          <form class="form-horizontal" method="post" action="<?= base_url() ?>Pengajar/editpengajar_proses" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="text1" class="control-label col-lg-4">Nama</label>
+
+                                <div class="col-lg-8">
+                                    <input type="text" id="text1" placeholder="Nama"  name="dosen_name" class="form-control" value="<?php echo "$data_dosen->dosen_nama"; ?>" required="required">
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <label for="text1" class="control-label col-lg-4">Tempat Lahir</label>
+
+                                <div class="col-lg-8">
+                                    <input type="text" id="text1" placeholder="Tempat Lahir" name="tmpt_lahir" class="form-control" value="<?php echo "$data_dosen->tmpt_lahir"; ?>" required="required">
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <label for="text1" class="control-label col-lg-4">Tanggal Lahir</label>
+
+                                <div class="col-lg-8">
+                                    <input class="form-control" type="date"  name="tgl_lahir" value="<?php echo "$data_dosen->tgl_lahir"; ?>" required="required">
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <label for="text1" class="control-label col-lg-4">Pendidikan Terakhir</label>
+
+                                <div class="col-lg-8">
+                                    <input type="text" id="text1" placeholder="Pendidikan Terakhir"  name="pendidikan" class="form-control" value="<?php echo "$data_dosen->pendidikan"; ?>" required="required">
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <label for="text1" class="control-label col-lg-4">Mengajar</label>
+
+                                <div class="col-lg-8">
+                                    <textarea class="form-control" name="mengajar" required="required"><?php echo "$data_dosen->mengajar"; ?></textarea>
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <label for="text1" class="control-label col-lg-4">Status</label>
+
+                                <div class="col-lg-8">
+                                    <select class="form-control" name="status" required="required">
+                                        <option value="<?php echo "$data_dosen->status"; ?>">Dosen <?php echo "$data_dosen->status"; ?></option>
+                                        <option value="tetap">Dosen Tetap</option>
+                                        <option value="luar biasa">Dosen Luar Biasa</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                              <div class="form-group">
+                                  <label for="text1" class="control-label col-lg-4">Email</label>
+
+                                  <div class="col-lg-8">
+                                      <input type="text" id="text1" placeholder="Email" name="email" class="form-control" value="<?php echo "$data_dosen->email"; ?>" required="required">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="text1" class="control-label col-lg-2"></label>
+                                  <div class="col-lg-8">
+                                    <input type="hidden" name="dosen_id"  id="text1" placeholder="Isi Banyak Mahasiswa" class="form-control" value="<?php echo "$data_dosen->dosen_id";?>">
+                                      <button type="submit" name="btn simpan" class="btn btn-primary">Simpan</button>
+                                  </div>
+                              </div>
+                          </form>
+                          <?php }//akhir menampilkan edit data ?>
                         </div>
                     </div>
                 </div>

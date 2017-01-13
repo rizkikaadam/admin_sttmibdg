@@ -6,40 +6,73 @@
                         <?php
                               //<td><img src='assets/gambar/$data_dosen->foto' width='100' /></td>
                               foreach ($dosen->result() as $data_dosen) {
-                                    /*$data_dosen->dosen_id
-                                    $data_dosen->dosen_nama
-                                    $data_dosen->mengajar
-                                    $data_dosen->email
-                                    $data_dosen->status*/
+                                    $dosen_id=$data_dosen->dosen_id;
+                                    $status=$data_dosen->status;
                                     $foto=$data_dosen->foto;
-
+                                    $nama=$data_dosen->dosen_nama;
+                                    $email=$data_dosen->email;
+                                    $mengajar=$data_dosen->mengajar;
+                                    $tmpt_lahir=$data_dosen->tmpt_lahir;
+                                    $tgl_lahir=$data_dosen->tgl_lahir;
+                                    $username=$data_dosen->username;
+                                    $pendidikan=$data_dosen->pendidikan;
                               }// akhir menampilkan data dosen
                          ?>
               <div class="col-lg-4">
                   <div class="box">
                       <header>
-                        <h5><i class="glyphicon glyphicon-home"></i>&nbsp;Foto Ketua</h5>
+                        <h5><i class="glyphicon glyphicon-picture"></i>&nbsp;Foto Ketua</h5>
                           <div class="toolbar">
                             <a data-toggle="modal" data-original-title="Help" data-placement="bottom"
                                href="#helpModal" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> edit</a>
                           </div>
                       </header>
                       <div class="body">
-                          <img src="<?= base_url() ?>assets/gambar/<?php echo $foto;  ?>"width="50%"  />
+                          <img src="<?= base_url() ?>assets/gambar/<?php echo $foto;  ?>"width="100%"  />
                       </div>
                   </div>
               </div>
-              <div class="col-lg-12">
+              <div class="col-lg-8">
                     <div class="box">
                         <header>
                             <div class="icons"><i class="glyphicon glyphicon-list"></i></div>
                             <h5><i class="glyphicon glyphicon-user"></i>&nbsp;Data Pengajar</h5>
                             <div class="toolbar">
                               <a data-toggle="modal" data-original-title="Help" data-placement="bottom"
-                                 href="<?= base_url() ?>Profil/edit_pengjar" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> Edit Data Dosen</a>
+                                 href="<?php echo base_url(); ?>Pengajar/edit_pengajar/<?php echo "$dosen_id"; ?>" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> Edit Data Dosen</a>
                             </div>
                         </header>
                         <div id="collapse4" class="body">
+                            <table class="table table-striped responsive-table">
+                                    <tr>
+                                        <td><i class="glyphicon glyphicon-user"></i> Nama  :</td>
+                                        <td><?php echo "$nama"; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="glyphicon glyphicon-heart"></i> Tempat, Tanggal Lahir :</td>
+                                        <td><?php echo "$tmpt_lahir, $tgl_lahir"; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="glyphicon  glyphicon-book"></i> Pendidikan :</td>
+                                        <td><?php echo "$pendidikan"; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="glyphicon glyphicon-briefcase"></i> Mengajar :</td>
+                                        <td><?php echo "$mengajar"; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="glyphicon glyphicon-envelope"></i> Email :</td>
+                                        <td><?php echo "$email"; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="glyphicon glyphicon-user"></i> Status :</td>
+                                        <td><?php echo "Dosen $status"; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="glyphicon glyphicon-user"></i> Username :</td>
+                                        <td><?php echo "$username"; ?></td>
+                                    </tr>
+                              </table>
                         </div>
                     </div>
                 </div>
@@ -113,3 +146,34 @@
 <p>2016 &copy; STTMI Bandung Powered By Ukuranmu Studio</p>
 </footer>
 <!-- /#footer -->
+<div id="helpModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Upload Foto Dosen</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                  <form class="form-horizontal" method="post" action="<?php echo base_url() ?>Pengajar/update_foto" enctype="multipart/form-data">
+                      <div class="form-group">
+                          <label class="control-label col-lg-2">Foto Dosen</label>
+                          <div class="col-lg-8">
+                              <input type="file" name="foto" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="text1" class="control-label col-lg-2"></label>
+                          <div class="col-lg-8">
+                            <input type="hidden" name="dosen_id"  id="text1" placeholder="Isi Banyak Mahasiswa" class="form-control" value="<?php echo $dosen_id;?>">
+                              <button type="submit" name="btn simpan" class="btn btn-primary">Simpan</button>
+                          </div>
+                      </div>
+                  </form>
+                </p>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
