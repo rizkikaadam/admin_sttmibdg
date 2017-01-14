@@ -1,17 +1,30 @@
-<?php
-include "header.php";
-include "top.php";
-include "left.php";
-?>
                 <div id="content">
                     <div class="outer">
                         <div class="inner bg-light lter">
                             <!-- table -->
+                            <?php
+                              $pesan=$this->session->flashdata('message');
+                              if ($pesan == "hapus") {
+                                echo "<p class='bg-danger'>Data Berhasil Dihapus</p>";
+                              }
+                              ?>
                             <div class="col-lg-12">
                                 <div class="box">
                                     <header>
-                                        <h5>Unduhan</h5>
+                                      <div class="icons"><i class="glyphicon glyphicon-list"></i></div>
+                                      <h5><i class="glyphicon glyphicon-user"></i>&nbsp;Data Unduhan</h5>
+                                      <div class="toolbar">
+                                        <a data-toggle="modal" data-original-title="Help" data-placement="bottom"
+                                           href="#tambah" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> Tambah Data Unduhan</a>
+                                      </div>
                                     </header>
+                                    <?php
+                                    $jumlah_data=$unduh->num_rows();
+                                    if ($jumlah_data==0) {
+                                      echo "Data Belum Terisi";
+                                    }
+                                    else {
+                                     ?>
                                     <div id="borderedTable" class="body collapse in">
                                       <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
                                           <thead>
@@ -20,20 +33,33 @@ include "left.php";
                                                   <th>Judul</th>
                                                   <th>Keterangan</th>
                                                   <th>File</th>
+                                                  <th>Jenis</th>
                                                   <th>Manage</th>
                                               </tr>
                                           </thead>
                                           <tbody>
+                                            <?php
+                                              foreach ($unduh->result() as $data_unduh) {
+                                                 ?>
                                               <tr>
-                                                  <td>1</td>
-                                                  <td>Jill</td>
-                                                  <td>Smith</td>
-                                                  <td>50</td>
-                                                  <td>50</td>
+                                                  <td><?php echo $data_unduh->unduh_id; ?></td>
+                                                  <td><?php echo $data_unduh->judul_unduh; ?></td>
+                                                  <td><?php echo $data_unduh->keterangan; ?></td>
+                                                  <td><?php echo $data_unduh->file_unduh; ?></td>
+                                                  <td><?php echo $data_unduh->jenis; ?></td>
+                                                  <?php echo $data_unduh->tanggal_unduh; ?>
+                                                  <td>
+                                                    <a data-toggle="modal" data-original-title="Help" data-placement="bottom"
+                                                       href="<?= base_url() ?>Unduh/edit_unduh/<?php echo $data_unduh->unduh_id; ?>" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> edit</a>
+                                                       <a data-toggle="modal" data-original-title="Help" data-placement="bottom"
+                                                          href="<?= base_url() ?>Unduh/hapus_proses/<?php echo $data_unduh->unduh_id; ?>/<?php echo $data_unduh->jenis; ?>" class="btn btn-danger btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> hapus</a>
+                                                  </td>
                                               </tr>
+                                              <?php } ?>
                                           </tbody>
                                         </table>
                                     </div>
+                                    <?php }//akhir menghitung jumlah data ?>
                                 </div>
 
                                 <br/>
@@ -120,64 +146,3 @@ include "left.php";
             <footer class="Footer bg-dark dker">
                 <p>2016 &copy; STTMI Bandung Powered By Ukuranmu Studio</p>
             </footer>
-            <!-- /#footer -->
-            <!-- #helpModal -->
-            <div id="helpModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
-            <!-- /#helpModal -->
-            <!--jQuery -->
-            <script src="assets/lib/jquery/jquery.js"></script>
-
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.6/js/jquery.tablesorter.min.js"></script>
-                    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-
-            <!--Bootstrap -->
-            <script src="assets/lib/bootstrap/js/bootstrap.js"></script>
-            <!-- MetisMenu -->
-            <script src="assets/lib/metismenu/metisMenu.js"></script>
-            <!-- Screenfull -->
-            <script src="assets/lib/screenfull/screenfull.js"></script>
-
-
-            <!-- Metis core scripts -->
-            <script src="assets/js/core.js"></script>
-            <!-- Metis demo scripts -->
-            <script src="assets/js/app.js"></script>
-
-                <script>
-                    $(function() {
-                      Metis.MetisTable();
-                      Metis.metisSortable();
-                    });
-                </script>
-
-            <script src="assets/js/style-switcher.js"></script>
-        </body>
-
-  </html>

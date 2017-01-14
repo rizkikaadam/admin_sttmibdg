@@ -67,15 +67,15 @@
                 </a>
                   <ul class="collapse">
                     <li>
-                      <a href="<?php echo base_url(); ?>unduh.php/materi">
+                      <a href="<?php echo base_url(); ?>unduh/materi">
                         <i class="glyphicon glyphicon-book"></i>&nbsp; Materi </a>
                     </li>
                     <li>
-                      <a href="<?php echo base_url(); ?>unduh.php/tugas">
+                      <a href="<?php echo base_url(); ?>unduh/tugas">
                         <i class="glyphicon glyphicon-book"></i>&nbsp; Tugas </a>
                     </li>
                     <li>
-                      <a href="<?php echo base_url(); ?>unduh.php/lainnya">
+                      <a href="<?php echo base_url(); ?>unduh/lainnya">
                         <i class="glyphicon glyphicon-book"></i>&nbsp; Lainnya </a>
                     </li>
                   </ul>
