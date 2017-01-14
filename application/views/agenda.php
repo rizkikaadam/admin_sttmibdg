@@ -1,37 +1,58 @@
-<?php
-include "header.php";
-include "top.php";
-include "left.php";
-?>
                 <div id="content">
                     <div class="outer">
                         <div class="inner bg-light lter">
                             <!-- table -->
                             <div class="col-lg-12">
                                 <div class="box">
-                                    <header>
-                                        <h5>Agenda</h5>
-                                    </header>
+                                  <header>
+                                    <h5><i class="glyphicon glyphicon-calendar"></i>&nbsp;Data Agenda</h5>
+                                      <div class="toolbar">
+                                        <a data-toggle="modal" data-original-title="Help" data-placement="bottom"
+                                           href="#tambah" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> Tambah</a>
+                                      </div>
+                                  </header>
+                                    <?php
+                                    $jumlah_data=$agenda->num_rows();
+                                    if ($jumlah_data==0) {
+                                      echo "Data Belum Terisi";
+                                    }
+                                    else {
+                                     ?>
                                     <div id="borderedTable" class="body collapse in">
                                       <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
                                           <thead>
                                               <tr>
                                                   <th>No</th>
                                                   <th>Agenda</th>
+                                                  <th>Deskripsi</th>
+                                                  <th>Tempat</th>
+                                                  <th>Prodi</th>
                                                   <th>Tanggal</th>
                                                   <th>Manage</th>
                                               </tr>
                                           </thead>
                                           <tbody>
+                                            <?php
+                                            $no=0;
+                                            foreach ($agenda->result() as $data_agenda) {
+                                              $no++;
+                                             ?>
                                               <tr>
-                                                  <td>1</td>
-                                                  <td>Jill</td>
-                                                  <td>Smith</td>
-                                                  <td>50</td>
+                                                  <td><?php echo "$no"; ?></td>
+                                                  <td><?php echo $data_agenda->agenda_judul; ?></td>
+                                                  <td><?php echo $data_agenda->agenda_deskripsi; ?></td>
+                                                  <td><?php echo $data_agenda->agenda_tempat; ?></td>
+                                                  <td><?php echo $data_agenda->agenda_prodi; ?></td>
+                                                  <td><?php echo $data_agenda->agenda_tanggal; ?></td>
+                                                  <td><a href="<?php echo base_url() ?>agenda/edit_agenda/<?php echo $data_agenda->agenda_id; ?>" class="btn btn-primary btn-sm btn-rect" alt="edit data profil">  <i class="glyphicon glyphicon-edit"></i> edit</a>
+                                                    <a href="<?php echo base_url() ?>agenda/hapus_agenda/<?php echo $data_agenda->agenda_id; ?>" class="btn btn-danger btn-sm btn-rect" alt="edit data profil">  <i class="glyphicon glyphicon-edit"></i> hapus</a>
+                                                  </td>
                                               </tr>
+                                              <?php }//akhir menampilkan agenda ?>
                                           </tbody>
                                         </table>
                                     </div>
+                                    <?php }//akhir menghitung agenda ?>
                                 </div>
 
                                 <br/>
