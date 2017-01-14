@@ -5,6 +5,10 @@ class Profil extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
+		if($this->session->userdata('status') != "login"){
+			$this->session->set_flashdata('message', '0');
+			redirect('login');
+		}
 		$this->load->database();
 		$this->load->library('session');
 		$this->load->model("profil_model"); //constructor yang dipanggil ketika memanggil profil.php untuk melakukan pemanggilan pada model : profil_model.php yang ada di folder models

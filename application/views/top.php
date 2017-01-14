@@ -10,7 +10,7 @@
                     </header>
                     <div class="topnav">
                         <div class="btn-group">
-                            <a href="login.html" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom"
+                            <a href="<?php echo base_url(); ?>Login/logout" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom"
                                class="btn btn-metis-1 btn-sm">
                                 <i class="glyphicon glyphicon-log-out"></i> Logut
                             </a>
