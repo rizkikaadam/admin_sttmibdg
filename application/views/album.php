@@ -7,15 +7,15 @@
                                     <div class="box">
                                         <header>
                                             <div class="icons"><i class="glyphicon glyphicon-list"></i></div>
-                                            <h5><i class="glyphicon glyphicon-user"></i>&nbsp;Data berita</h5>
+                                            <h5><i class="glyphicon glyphicon-user"></i>&nbsp;Data album</h5>
                                             <div class="toolbar">
                                               <a data-toggle="modal" data-original-title="Help" data-placement="bottom"
-                                                 href="berita/tambah_berita" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> Tambah Data berita</a>
+                                                 href="#tambah" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> Tambah Data album</a>
                                             </div>
                                         </header>
                                         <div id="collapse4" class="body">
                                           <?php
-                                          $jumlah_data=$berita->num_rows();
+                                          $jumlah_data=$album->num_rows();
                                           if ($jumlah_data==0) {
                                             echo "Data Belum Terisi";
                                           }
@@ -28,34 +28,33 @@
                                             <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
                                                 <thead>
                                                 <tr>
-                                                    <th>ID.</th>
-                                                    <th>Foto</th>
-                                                    <th>Judul</th>
-                                                    <th>Tanggal</th>
-                                                    <th>Penulis</th>
+                                                    <th>No.</th>
+                                                    <!--<th>Foto</th>-->
+                                                    <th>Nama</th>
+                                                    <th>Mengajar</th>
+                                                    <th>Status</th>
                                                     <th>Manage</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                   <?php
-                                                        //<td><img src='assets/gambar/$data_berita->foto' width='100' /></td>
-                                                        foreach ($berita->result() as $data_berita) {
+                                                        //<td><img src='assets/gambar/$data_album->foto' width='100' /></td>
+                                                        foreach ($album->result() as $data_album) {
                                                           echo "<tr>
-                                                              <td>$data_berita->berita_id</td>
-                                                              <td>$data_berita->berita_foto</td>
-                                                              <td>$data_berita->berita_judul</td>
-                                                              <td>$data_berita->berita_tanggal</td>
-                                                              <td>$data_berita->penulis</td>
+                                                              <td>$data_album->album_id</td>
+                                                              <td>$data_album->album_deskripsi</td>
+                                                              <td>$data_album->album_tanggal</td>
+                                                              <td>$data_album->album_jenis</td>
                                                               <td>
-                                                                <a href='berita/edit_berita/$data_berita->berita_id/' class='btn btn-primary btn-sm'>  <i class='glyphicon glyphicon-eye-open'></i>&nbsp;Edit</a>
-                                                                <a href='berita/hapus_foto/$data_berita->berita_id' class='btn btn-danger btn-sm'>  <i class='glyphicon glyphicon-trash'></i>&nbsp;Hapus</a>
+                                                                <a href='album/lihat_album/$data_album->album_id/' class='btn btn-warning btn-sm'>  <i class='glyphicon glyphicon-eye-open'></i>&nbsp;Lihat</a>
+                                                                <a href='album/hapus_foto/$data_album->album_id' class='btn btn-danger btn-sm'>  <i class='glyphicon glyphicon-trash'></i>&nbsp;Hapus</a>
                                                               </td>
                                                           </tr>";
-                                                        }// akhir menampilkan data berita
+                                                        }// akhir menampilkan data album
                                                    ?>
                                                 </tbody>
                                               </table>
-                                              <?php }//akhir kondisi menghitung data berita ?>
+                                              <?php }//akhir kondisi menghitung data album ?>
                                         </div>
                                     </div>
                                 </div>
