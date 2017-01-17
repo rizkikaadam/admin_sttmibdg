@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Berita extends CI_Controller {
+class Artikel extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -13,7 +13,7 @@ class Berita extends CI_Controller {
 		$this->load->database();
 		$this->load->helper('date');
 		$this->load->library('session');
-		$this->load->model("berita_model"); //constructor yang dipanggil ketika memanggil profil.php untuk melakukan pemanggilan pada model : profil_model.php yang ada di folder models
+		$this->load->model("artikel_model"); //constructor yang dipanggil ketika memanggil profil.php untuk melakukan pemanggilan pada model : profil_model.php yang ada di folder models
 	}
 
 	public function index()
@@ -21,20 +21,20 @@ class Berita extends CI_Controller {
 		$this->load->view('header.php');
 		$this->load->view('top.php');
 		$this->load->view('left.php');
-		$data['berita'] = $this->berita_model->tampil_berita(); //berisi dari return value pada function getAllProducts() di file models/products_model.php
-		$this->load->view('berita.php',$data);
+		$data['artikel'] = $this->artikel_model->tampil_artikel(); //berisi dari return value pada function getAllProducts() di file models/products_model.php
+		$this->load->view('artikel.php',$data);
 		$this->load->view('bawah.php');
 	}
 
-	public function tambah_berita(){
+	public function tambah_artikel(){
 		$this->load->view('header.php');
 		$this->load->view('top.php');
 		$this->load->view('left.php');
-		$this->load->view('tambah_berita.php');
+		$this->load->view('tambah_artikel.php');
 		$this->load->view('bawah.php');
 	}
 
-	public function tambahberita_proses()
+	public function tambahartikel_proses()
 	{
 		$datestring = '%Y-%m-%d %h:%i:%s';
 		$time = time();
@@ -52,63 +52,63 @@ class Berita extends CI_Controller {
 
 		if ( ! $this->upload->do_upload('foto_nama')){
 			$error = array('error' => $this->upload->display_errors());
-			redirect('berita/lihat_berita/'.$dosen_id);
+			redirect('artikel/lihat_artikel/'.$dosen_id);
 		}else{
 			$gbr = $this->upload->data();
 			$data = array(
-					'berita_judul' => $this->input->post('berita_judul'),
-					'berita_isi' => $this->input->post('berita_isi'),
-					'berita_penulis' => $this->input->post('berita_penulis'),
-					'berita_tanggal' => $human,
-					'berita_foto' => $gbr['file_name']
+					'artikel_judul' => $this->input->post('artikel_judul'),
+					'artikel_isi' => $this->input->post('artikel_isi'),
+					'artikel_penulis' => $this->input->post('artikel_penulis'),
+					'artikel_tanggal' => $human,
+					'artikel_foto' => $gbr['file_name']
 				);
 			}
 
-				$this->berita_model->tambahberita_proses($data); //passing variable $data ke products_model
+				$this->artikel_model->tambahartikel_proses($data); //passing variable $data ke products_model
 
 				$this->session->set_flashdata('message', 'tambah');
-				redirect('berita'); //redirect page ke halaman utama controller products
+				redirect('artikel'); //redirect page ke halaman utama controller products
 
 	}
 
-	public function edit_berita($berita_id)
+	public function edit_artikel($artikel_id)
 	{
 		$this->load->view('header.php');
 		$this->load->view('top.php');
 		$this->load->view('left.php');
-		$data['berita'] = $this->berita_model->edit_berita($berita_id);
-		$this->load->view('edit_berita.php',$data);
+		$data['artikel'] = $this->artikel_model->edit_artikel($artikel_id);
+		$this->load->view('edit_artikel.php',$data);
 		$this->load->view('bawah.php');
 	}
 
 
-	public function editberita_proses(){
+	public function editartikel_proses(){
 		$datestring = '%Y-%m-%d %h:%i:%s';
 		$time = time();
 		$human= mdate($datestring, $time);
-		$berita_id=$this->input->post('berita_id');
+		$artikel_id=$this->input->post('artikel_id');
 		$data = array(
-			'berita_judul' => $this->input->post('berita_judul'),
-			'berita_isi' => $this->input->post('berita_isi'),
-			'berita_penulis' => $this->input->post('berita_penulis'),
-			'berita_tanggal' => $human
+			'artikel_judul' => $this->input->post('artikel_judul'),
+			'artikel_isi' => $this->input->post('artikel_isi'),
+			'artikel_penulis' => $this->input->post('artikel_penulis'),
+			'artikel_tanggal' => $human
 		);
 
-		$condition['berita_id'] = $this->input->post('berita_id'); //Digunakan untuk melakukan validasi terhadap produk mana yang akan diupdate nantinya
+		$condition['artikel_id'] = $this->input->post('artikel_id'); //Digunakan untuk melakukan validasi terhadap produk mana yang akan diupdate nantinya
 
-		$this->berita_model->editberita_proses($data, $condition); //passing variable $data ke products_model
+		$this->artikel_model->editartikel_proses($data, $condition); //passing variable $data ke products_model
 
 		$this->session->set_flashdata('message', '1');
-		redirect('berita'); //redirect page ke halaman utama controller products
+		redirect('artikel'); //redirect page ke halaman utama controller products
 
 	}
 
-	public function hapusberita_proses($berita_id)
+	public function hapusartikel_proses($artikel_id)
 	{
-				$this->berita_model->hapusberita_proses($berita_id); //passing variable $data ke products_model
+				$this->artikel_model->hapusartikel_proses($artikel_id); //passing variable $data ke products_model
 
 				$this->session->set_flashdata('message', 'hapus');
-				redirect('berita'); //redirect page ke halaman utama controller products
+				redirect('artikel'); //redirect page ke halaman utama controller products
 	}
 /*
 	public function tambahfoto_proses()
@@ -116,7 +116,7 @@ class Berita extends CI_Controller {
 		$datestring = '%Y-%m-%d %h:%i:%s';
 		$time = time();
 		$human= mdate($datestring, $time);
-			$berita_id=$this->input->post('berita_id');
+			$artikel_id=$this->input->post('artikel_id');
 		$this->load->library('upload');
 		$config['upload_path']          = './assets/gambar/'; //path folder
 		$config['allowed_types']        = 'gif|jpg|png|jpeg|bmp';
@@ -130,36 +130,36 @@ class Berita extends CI_Controller {
 
 		if ( ! $this->upload->do_upload('foto_nama')){
 			$error = array('error' => $this->upload->display_errors());
-			redirect('berita/lihat_berita/'.$dosen_id);
+			redirect('artikel/lihat_artikel/'.$dosen_id);
 		}else{
 			$gbr = $this->upload->data();
 			$data = array(
 										'foto_nama' =>$gbr['file_name'],
 										'foto_tanggal'=>$human,
-										'berita_id'=>$berita_id
+										'artikel_id'=>$artikel_id
 									);
-			$this->berita_model->tambahfoto_proses($data); //passing variable $data ke products_model
+			$this->artikel_model->tambahfoto_proses($data); //passing variable $data ke products_model
 
 			$this->session->set_flashdata('message', '1');
-			redirect('berita/lihat_berita/'.$berita_id); //redirect page ke halaman utama controller products
+			redirect('artikel/lihat_artikel/'.$artikel_id); //redirect page ke halaman utama controller products
 		}
 
 	}
 
-	public function hapusfoto_proses($foto_id,$berita_id)
+	public function hapusfoto_proses($foto_id,$artikel_id)
 	{
-				$this->berita_model->hapusfoto_proses($foto_id); //passing variable $data ke products_model
+				$this->artikel_model->hapusfoto_proses($foto_id); //passing variable $data ke products_model
 
 				$this->session->set_flashdata('message', 'hapus');
-				redirect('berita/lihat_berita/'.$berita_id); //redirect page ke halaman utama controller products
+				redirect('artikel/lihat_artikel/'.$artikel_id); //redirect page ke halaman utama controller products
 	}
 
-	public function hapusberita_proses($berita_id)
+	public function hapusartikel_proses($artikel_id)
 	{
-				$this->berita_model->hapusberita_proses($berita_id); //passing variable $data ke products_model
+				$this->artikel_model->hapusartikel_proses($artikel_id); //passing variable $data ke products_model
 
 				$this->session->set_flashdata('message', 'hapus');
-				redirect('berita'); //redirect page ke halaman utama controller products
+				redirect('artikel'); //redirect page ke halaman utama controller products
 	}
 	/*
 

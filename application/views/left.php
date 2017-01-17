@@ -46,7 +46,7 @@
                 </a>
               </li>
               <li class="">
-                <a href="dashboard.html">
+                <a href="<?php echo base_url(); ?>album">
                   <i class="glyphicon glyphicon-picture"></i><span class="link-title">&nbsp;Galeri</span>
                 </a>
               </li>
