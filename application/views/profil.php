@@ -44,7 +44,13 @@
                                         <table class="table table-bordered responsive-table">
                                           <?php
                                           $pesan=$this->session->flashdata('message');
-                                          if ($pesan == "1") {
+                                          if ($pesan == "edit") {
+                                            echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                          }
+                                          elseif ($pesan == "hapus") {
+                                            echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                          }
+                                          elseif ($pesan == "tambah") {
                                             echo "<p class='bg-info'>Data Berhasil Diubah</p>";
                                           }
                                           ?>

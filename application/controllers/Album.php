@@ -49,7 +49,7 @@ class Album extends CI_Controller {
 			);
 				$this->album_model->tambahalbum_proses($data); //passing variable $data ke products_model
 
-				$this->session->set_flashdata('message', '1');
+				$this->session->set_flashdata('message', 'tambah');
 				redirect('album'); //redirect page ke halaman utama controller products
 
 	}
@@ -60,6 +60,7 @@ class Album extends CI_Controller {
 		$this->load->view('top.php');
 		$this->load->view('left.php');
 		$data['foto'] = $this->album_model->lihat_foto($album_id);
+		$data['album_id'] = $album_id;
 		$this->load->view('lihat_foto.php',$data);
 		$this->load->view('modal_foto.php');
 		$this->load->view('bawah.php');
@@ -92,7 +93,7 @@ class Album extends CI_Controller {
 
 		$this->album_model->editalbum_proses($data, $condition); //passing variable $data ke products_model
 
-		$this->session->set_flashdata('message', '1');
+		$this->session->set_flashdata('message', 'edit');
 		redirect('album/lihat_album/'.$dosen_id); //redirect page ke halaman utama controller products
 
 	}
@@ -109,7 +110,7 @@ class Album extends CI_Controller {
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
-		//$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		//$config['full_path']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
 		$this->upload->initialize($config);
 
 		$this->load->library('upload', $config);
@@ -120,13 +121,13 @@ class Album extends CI_Controller {
 		}else{
 			$gbr = $this->upload->data();
 			$data = array(
-										'foto_nama' =>$gbr['file_name'],
+										'foto_nama' =>$gbr['full_path'],
 										'foto_tanggal'=>$human,
 										'album_id'=>$album_id
 									);
 			$this->album_model->tambahfoto_proses($data); //passing variable $data ke products_model
 
-			$this->session->set_flashdata('message', '1');
+			$this->session->set_flashdata('message', 'tambah');
 			redirect('album/lihat_album/'.$album_id); //redirect page ke halaman utama controller products
 		}
 

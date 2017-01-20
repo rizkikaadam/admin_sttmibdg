@@ -45,12 +45,12 @@ class Berita extends CI_Controller {
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
-		//$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		//$config['full_path']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
 		$this->upload->initialize($config);
 
 		$this->load->library('upload', $config);
 
-		if ( ! $this->upload->do_upload('foto_nama')){
+		if ( ! $this->upload->do_upload('berita_foto')){
 			$error = array('error' => $this->upload->display_errors());
 			redirect('berita/lihat_berita/'.$dosen_id);
 		}else{
@@ -58,9 +58,9 @@ class Berita extends CI_Controller {
 			$data = array(
 					'berita_judul' => $this->input->post('berita_judul'),
 					'berita_isi' => $this->input->post('berita_isi'),
-					'berita_penulis' => $this->input->post('berita_penulis'),
+					'penulis' => $this->input->post('berita_penulis'),
 					'berita_tanggal' => $human,
-					'berita_foto' => $gbr['file_name']
+					'berita_foto' => $gbr['full_path']
 				);
 			}
 
@@ -90,15 +90,15 @@ class Berita extends CI_Controller {
 		$data = array(
 			'berita_judul' => $this->input->post('berita_judul'),
 			'berita_isi' => $this->input->post('berita_isi'),
-			'berita_penulis' => $this->input->post('berita_penulis'),
+			'penulis' => $this->input->post('berita_penulis'),
 			'berita_tanggal' => $human
 		);
 
 		$condition['berita_id'] = $this->input->post('berita_id'); //Digunakan untuk melakukan validasi terhadap produk mana yang akan diupdate nantinya
 
-		$this->berita_model->editberita_proses($data, $condition); //passing variable $data ke products_model
+		$this->berita_model->editberita_proses($data, $this->input->post('berita_id')); //passing variable $data ke products_model
 
-		$this->session->set_flashdata('message', '1');
+		$this->session->set_flashdata('message', 'edit');
 		redirect('berita'); //redirect page ke halaman utama controller products
 
 	}
@@ -123,7 +123,7 @@ class Berita extends CI_Controller {
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
-		//$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		//$config['full_path']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
 		$this->upload->initialize($config);
 
 		$this->load->library('upload', $config);
@@ -134,7 +134,7 @@ class Berita extends CI_Controller {
 		}else{
 			$gbr = $this->upload->data();
 			$data = array(
-										'foto_nama' =>$gbr['file_name'],
+										'foto_nama' =>$gbr['full_path'],
 										'foto_tanggal'=>$human,
 										'berita_id'=>$berita_id
 									);

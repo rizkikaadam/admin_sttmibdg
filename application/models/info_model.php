@@ -1,7 +1,7 @@
 <?php
 //File products_model.php
 
-class agenda_model extends CI_Model
+class info_model extends CI_Model
 {
 
 	function __construct()
@@ -9,39 +9,39 @@ class agenda_model extends CI_Model
 		parent::__construct();
 	}
 
-	function tampil_agenda()
+	function tampil_info()
 	{
     $this->db->select("*");
-    $this->db->from("tbl_agenda");
+    $this->db->from("tbl_info");
 
 		return $this->db->get();
 	}
 
 	function tambah_proses($data)
 	{
-		$this->db->insert('tbl_agenda', $data);
+		$this->db->insert('tbl_info', $data);
 	}
 
-	function hapus_agenda($agenda_id)
+	function hapus_info($info_id)
 	{
 		//delete produk berdasarkan id
-    $this->db->where('agenda_id', $agenda_id);
-    $this->db->delete('tbl_agenda');
+    $this->db->where('info_id', $info_id);
+    $this->db->delete('tbl_info');
 	}
 
-	function edit_agenda($agenda_id){
+	function edit_info($info_id){
 		//select semua data yang ada pada table pengajar
-		$this->db->where('agenda_id', $agenda_id); //Akan melakukan select terhadap row yang memiliki productId sesuai dengan productId yang telah dipilih
+		$this->db->where('info_id', $info_id); //Akan melakukan select terhadap row yang memiliki productId sesuai dengan productId yang telah dipilih
     $this->db->select("*");
-    $this->db->from("tbl_agenda");
+    $this->db->from("tbl_info");
 		return $this->db->get();
 	}
 
-	function editagenda_proses($data, $agenda_id)
+	function editinfo_proses($data, $info_id)
 	{
 		//update produk
-    $this->db->where('agenda_id', $agenda_id);
-    $this->db->update('tbl_agenda', $data); //Melakukan update terhadap table msProduct sesuai dengan data yang telah diterima dari controller
+    $this->db->where('info_id', $info_id);
+    $this->db->update('tbl_info', $data); //Melakukan update terhadap table msProduct sesuai dengan data yang telah diterima dari controller
 	}
 	/*
 	function lihat_pengajar($dosen_id)

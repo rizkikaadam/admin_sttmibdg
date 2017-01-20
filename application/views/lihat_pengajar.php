@@ -28,7 +28,7 @@
                           </div>
                       </header>
                       <div class="body">
-                          <img src="<?= base_url() ?>assets/gambar/<?php echo $foto;  ?>"width="100%"  />
+                          <img src="<?= base_url() ?><?php echo $foto;  ?>"width="100%"  />
                       </div>
                   </div>
               </div>

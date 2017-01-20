@@ -71,7 +71,7 @@ class Unduh extends CI_Controller {
 		}else{
 			$gbr = $this->upload->data();
 			$data = array(
-									'file_unduh' =>$gbr['file_name'],
+									'file_unduh' =>$gbr['full_path'],
 									'judul_unduh'=>$this->input->post('judul_unduh'),
 									'keterangan'=>$this->input->post('keterangan'),
 									'jenis'=>$this->input->post('jenis')
@@ -79,7 +79,7 @@ class Unduh extends CI_Controller {
 
 				$this->unduh_model->tambah_proses($data); //passing variable $data ke products_model
 
-				$this->session->set_flashdata('message', '1');
+				$this->session->set_flashdata('message', 'tambah');
 				redirect('unduh/'.$this->input->post('jenis')); //redirect page ke halaman utama controller products
 			}
 	}
@@ -104,7 +104,6 @@ class Unduh extends CI_Controller {
 	public function editunduh_proses()
 	{
 		$data = array(
-								'file_unduh' =>$gbr['file_name'],
 								'judul_unduh'=>$this->input->post('judul_unduh'),
 								'keterangan'=>$this->input->post('keterangan'),
 								'jenis'=>$this->input->post('jenis')
@@ -117,7 +116,7 @@ class Unduh extends CI_Controller {
 		redirect('unduh/'.$this->input->post('jenis')); //redirect page ke halaman utama controller products
 	}
 
-	public function edifile_proses()
+	public function editfile_proses()
 	{
 		$this->load->library('upload');
 		$config['upload_path']          = './assets/file/'; //path folder
@@ -135,7 +134,7 @@ class Unduh extends CI_Controller {
 		}else{
 			$gbr = $this->upload->data();
 			$data = array(
-									'file_unduh' =>$gbr['file_name'],
+									'file_unduh' =>$gbr['full_path']
 								);
 
 							}
@@ -143,7 +142,7 @@ class Unduh extends CI_Controller {
 		$this->unduh_model->editunduh_proses($data,$unduh_id); //passing variable $data ke products_model
 
 		$this->session->set_flashdata('message', 'edit');
-		//redirect('unduh/'.$this->input->post('jenis')); //redirect page ke halaman utama controller products
+		redirect('unduh/'.$this->input->post('jenis')); //redirect page ke halaman utama controller products
 	}
 
 
@@ -167,7 +166,7 @@ class Unduh extends CI_Controller {
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
-		$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		$config['full_path']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
 		$this->upload->initialize($config);
 
 		$this->load->library('upload', $config);
@@ -177,7 +176,7 @@ class Unduh extends CI_Controller {
 			$this->load->view('profil', $error);
 		}else{
 			$gbr = $this->upload->data();
-			$data = array('foto_ketua' =>$gbr['file_name']);
+			$data = array('foto_ketua' =>$gbr['full_path']);
 				$condition['profil_id'] = $this->input->post('profil_id'); //Digunakan untuk melakukan validasi terhadap produk mana yang akan diupdate nantinya
 
 				$this->profil_model->editprofil_proses($data, $condition); //passing variable $data ke products_model

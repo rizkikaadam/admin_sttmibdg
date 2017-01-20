@@ -33,7 +33,7 @@
                             <h5><i class="glyphicon glyphicon-user"></i>&nbsp;Edit Data Pengajar</h5>
                         </header>
                         <div id="collapse4" class="body">
-                          <form class="form-horizontal" method="post" action="<?= base_url() ?>Unduh/editunduh_proses" enctype="multipart/form-data">
+                          <form class="form-horizontal" method="post" action="<?php echo base_url() ?>Unduh/editunduh_proses" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="text1" class="control-label col-lg-4">Judul Unduh</label>
 
@@ -57,7 +57,7 @@
 
                                 <div class="col-lg-8">
                                     <select class="form-control" name="jenis" required="required">
-                                        <<option value="<?php echo $judul_unduh; ?>"><?php echo $jenis; ?></option>
+                                        <<option value="<?php echo $jenis; ?>"><?php echo $jenis; ?></option>
                                         <option value="materi">Materi</option>
                                         <option value="tugas">Tugas</option>
                                         <option value="lainnya">Lainnya</option>
@@ -152,7 +152,7 @@
             </div>
             <div class="modal-body">
                 <p>
-                  <form class="form-horizontal" method="post" action="<?php echo base_url() ?>Pengajar/update_foto" enctype="multipart/form-data">
+                  <form class="form-horizontal" method="post" action="<?php echo base_url() ?>Unduh/editfile_proses" enctype="multipart/form-data">
                       <div class="form-group">
                           <label class="control-label col-lg-2">File Unduh</label>
                           <div class="col-lg-8">
@@ -169,6 +169,7 @@
                         <label for="text1" class="control-label col-lg-2"></label>
                           <div class="col-lg-8">
                             <input type="hidden" name="unduh_id"  id="text1" placeholder="Isi Banyak Mahasiswa" class="form-control" value="<?php echo $unduh_id;?>">
+                              <input type="hidden" name="jenis"  id="text1" placeholder="Isi Banyak Mahasiswa" class="form-control" value="<?php echo $jenis;?>">
                               <button type="submit" name="btn simpan" class="btn btn-primary">Simpan</button>
                           </div>
                       </div>

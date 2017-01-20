@@ -34,7 +34,7 @@ class Pengajar extends CI_Controller {
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
-		//$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		//$config['full_path']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
 		$this->upload->initialize($config);
 
 		$this->load->library('upload', $config);
@@ -45,7 +45,7 @@ class Pengajar extends CI_Controller {
 		}else{
 			$gbr = $this->upload->data();
 			$data = array(
-				'foto' =>$gbr['file_name'],
+				'foto' =>$gbr['full_path'],
 				'dosen_nama' => $this->input->post('dosen_name'),
 				'tgl_lahir' => $this->input->post('tgl_lahir'),
 				'tmpt_lahir' => $this->input->post('tmpt_lahir'),
@@ -57,7 +57,7 @@ class Pengajar extends CI_Controller {
 			);
 				$this->pengajar_model->tambahpengajar_proses($data); //passing variable $data ke products_model
 
-				$this->session->set_flashdata('message', '1');
+				$this->session->set_flashdata('message', 'tambah');
 				redirect('pengajar'); //redirect page ke halaman utama controller products
 		}
 	}
@@ -99,7 +99,7 @@ class Pengajar extends CI_Controller {
 
 		$this->pengajar_model->editpengajar_proses($data, $condition); //passing variable $data ke products_model
 
-		$this->session->set_flashdata('message', '1');
+		$this->session->set_flashdata('message', 'edit');
 		redirect('Pengajar/lihat_pengajar/'.$dosen_id); //redirect page ke halaman utama controller products
 
 	}
@@ -114,7 +114,7 @@ class Pengajar extends CI_Controller {
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
-		//$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		//$config['full_path']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
 		$this->upload->initialize($config);
 
 		$this->load->library('upload', $config);
@@ -124,15 +124,23 @@ class Pengajar extends CI_Controller {
 			redirect('Pengajar/lihat_pengajar/'.$dosen_id);
 		}else{
 			$gbr = $this->upload->data();
-			$data = array('foto' =>$gbr['file_name']);
+			$data = array('foto' =>$gbr['full_path']);
 			$condition['dosen_id'] = $this->input->post('dosen_id'); //Digunakan untuk melakukan validasi terhadap produk mana yang akan diupdate nantinya
 
 			$this->pengajar_model->editpengajar_proses($data, $condition); //passing variable $data ke products_model
 
-			$this->session->set_flashdata('message', '1');
+			$this->session->set_flashdata('message', 'edit');
 			redirect('Pengajar/lihat_pengajar/'.$dosen_id); //redirect page ke halaman utama controller products
 		}
 
+	}
+
+	public function hapus_pengajar($dosen_id)
+	{
+				$this->pengajar_model->hapus_proses($dosen_id); //passing variable $data ke products_model
+
+				$this->session->set_flashdata('message', 'hapus');
+				redirect('Pengajar'); //redirect page ke halaman utama controller products
 	}
 	/*
 

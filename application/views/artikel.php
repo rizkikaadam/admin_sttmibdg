@@ -20,16 +20,21 @@
                                             echo "Data Belum Terisi";
                                           }
                                           else {
-                                           $pesan=$this->session->flashdata('message');
-                                           if ($pesan == "1") {
-                                             echo "<p class='bg-info'>Data Berhasil Ditambahkan</p>";
-                                           }
+                                            $pesan=$this->session->flashdata('message');
+                                            if ($pesan == "edit") {
+                                              echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                            }
+                                            elseif ($pesan == "hapus") {
+                                              echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                            }
+                                            elseif ($pesan == "tambah") {
+                                              echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                            }
                                            ?>
                                             <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
                                                 <thead>
                                                 <tr>
                                                     <th>ID.</th>
-                                                    <th>Foto</th>
                                                     <th>Judul</th>
                                                     <th>Tanggal</th>
                                                     <th>Penulis</th>
@@ -42,13 +47,12 @@
                                                         foreach ($artikel->result() as $data_artikel) {
                                                           echo "<tr>
                                                               <td>$data_artikel->artikel_id</td>
-                                                              <td>$data_artikel->artikel_foto</td>
                                                               <td>$data_artikel->artikel_judul</td>
                                                               <td>$data_artikel->artikel_tanggal</td>
                                                               <td>$data_artikel->penulis</td>
                                                               <td>
                                                                 <a href='artikel/edit_artikel/$data_artikel->artikel_id/' class='btn btn-primary btn-sm'>  <i class='glyphicon glyphicon-eye-open'></i>&nbsp;Edit</a>
-                                                                <a href='artikel/hapus_foto/$data_artikel->artikel_id' class='btn btn-danger btn-sm'>  <i class='glyphicon glyphicon-trash'></i>&nbsp;Hapus</a>
+                                                                <a href='artikel/hapusartikel_proses/$data_artikel->artikel_id' class='btn btn-danger btn-sm'>  <i class='glyphicon glyphicon-trash'></i>&nbsp;Hapus</a>
                                                               </td>
                                                           </tr>";
                                                         }// akhir menampilkan data artikel

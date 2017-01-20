@@ -32,10 +32,10 @@ class artikel_model extends CI_Model
 		return $this->db->get();
 	}
 
-	function editartikel_proses($data,$agenda_id)
+	function editartikel_proses($data,$artikel_id)
 	{
-		$this->db->where('agenda_id', $agenda_id);
-    $this->db->update('tbl_agenda', $data);
+		$this->db->where('artikel_id', $artikel_id);
+    $this->db->update('tbl_artikel', $data);
 	}
 
 	function tambahfoto_proses($data)

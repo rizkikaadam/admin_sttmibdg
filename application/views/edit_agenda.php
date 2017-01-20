@@ -11,7 +11,7 @@
                       <?php
                       foreach ($agenda->result() as $data_agenda) {
                        ?>
-                       <form class="form-horizontal" method="post" action="<?= base_url() ?>agenda/tambah_proses" enctype="multipart/form-data">
+                       <form class="form-horizontal" method="post" action="<?= base_url() ?>agenda/editagenda_proses" enctype="multipart/form-data">
                          <div class="form-group">
                              <label for="text1" class="control-label col-lg-4">Judul Agenda</label>
 

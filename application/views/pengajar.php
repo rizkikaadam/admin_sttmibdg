@@ -20,10 +20,16 @@
                                             echo "Data Belum Terisi";
                                           }
                                           else {
-                                           $pesan=$this->session->flashdata('message');
-                                           if ($pesan == "1") {
-                                             echo "<p class='bg-info'>Data Berhasil Ditambahkan</p>";
-                                           }
+                                            $pesan=$this->session->flashdata('message');
+                                            if ($pesan == "edit") {
+                                              echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                            }
+                                            elseif ($pesan == "hapus") {
+                                              echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                            }
+                                            elseif ($pesan == "tambah") {
+                                              echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                            }
                                            ?>
                                             <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
                                                 <thead>
@@ -47,7 +53,11 @@
                                                               <td>$data_dosen->mengajar</td>
                                                               <td>$data_dosen->email</td>
                                                               <td>$data_dosen->status</td>
-                                                              <td><a href='Pengajar/lihat_pengajar/$data_dosen->dosen_id' class='btn btn-warning btn-sm'>  <i class='glyphicon glyphicon-eye-open'></i>&nbsp;Lihat</a></td>
+                                                              <td>
+                                                                  <a href='Pengajar/lihat_pengajar/$data_dosen->dosen_id' class='btn btn-warning btn-sm'>  <i class='glyphicon glyphicon-eye-open'></i>&nbsp;Lihat</a>
+                                                                  <a href='Pengajar/hapus_pengajar/$data_dosen->dosen_id' class='btn btn-danger btn-sm'>  <i class='glyphicon glyphicon-trash'></i>&nbsp;Hapus</a>
+                                                              </td>
+
                                                           </tr>";
                                                         }// akhir menampilkan data dosen
                                                    ?>

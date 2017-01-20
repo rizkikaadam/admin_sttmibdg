@@ -6,7 +6,7 @@
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <header class="navbar-header">
-                        <a href="index.html" class="navbar-brand">STTMIBDG</a>
+                        <a href="#" class="navbar-brand"><h3>ADMIN WEBSITE STTMIBDG</h3></a>
                     </header>
                     <div class="topnav">
                         <div class="btn-group">

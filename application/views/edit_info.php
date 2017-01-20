@@ -5,44 +5,39 @@
             <div class="col-lg-12">
                 <div class="box">
                     <header>
-                        <h5><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit Berita</h5>
+                        <h5><i class="glyphicon glyphicon-calendar"></i>&nbsp;Edit info</h5>
                     </header>
                     <div id="borderedTable" class="body collapse in">
                       <?php
-                      foreach ($berita->result() as $data_berita) {
-                        $judul=$data_berita->berita_judul;
-                        $isi=$data_berita->berita_isi;
-                        $id=$data_berita->berita_id;
-                        $penulis=$data_berita->penulis;
-                      }
+                      foreach ($info->result() as $data_info) {
                        ?>
-                      <form class="form-horizontal" method="post" action="<?= base_url() ?>Berita/editberita_proses" enctype="multipart/form-data">
+                       <form class="form-horizontal" method="post" action="<?= base_url() ?>info/editinfo_proses" enctype="multipart/form-data">
+                         <div class="form-group">
+                             <label for="text1" class="control-label col-lg-4">Judul info</label>
+
+                             <div class="col-lg-8">
+                                 <input type="text" id="text1" name="info_judul" class="form-control" value="<?php echo $data_info->info_judul;?>">
+                             </div>
+                         </div>
+                         <!-- /.form-group -->
+
+                         <div class="form-group">
+                             <label for="text1" class="control-label col-lg-4">Deskripsi</label>
+
+                             <div class="col-lg-8">
+                                 <textarea class="form-control" name="info_deskripsi"><?php echo $data_info->info_deskripsi;?></textarea>
+                             </div>
+                         </div>
+
                           <div class="form-group">
-                              <label for="text1" class="control-label col-lg-2">Judul Berita</label>
+                            <label for="text1" class="control-label col-lg-4"></label>
                               <div class="col-lg-8">
-                                  <input type="text" name="berita_judul"  id="text1" placeholder="Judul Berita" class="form-control" value="<?php echo "$judul"; ?>" />
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label for="text1" class="control-label col-lg-2">Isi</label>
-                              <div class="col-lg-8">
-                              <textarea id="ckeditor" class="ckeditor" name="berita_isi"><?php echo "$isi"; ?></textarea>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label for="text1" class="control-label col-lg-2">Penulis</label>
-                              <div class="col-lg-8">
-                                  <input type="text" name="berita_penulis" value="<?php echo "$penulis"; ?>"/>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="text1" class="control-label col-lg-2"></label>
-                              <div class="col-lg-8">
-                                <input type="hidden" name="berita_id" value="<?php echo "$id"; ?>"/>
+                                <input type="hidden" name="info_id"  id="text1" placeholder="Isi Banyak Mahasiswa" class="form-control" value="<?php echo $data_info->info_id;?>">
                                   <button type="submit" name="btn simpan" class="btn btn-primary">Simpan</button>
                               </div>
                           </div>
                       </form>
+                      <?php }//akhir menampilkan edit data ?>
                     </div>
                 </div>
 
@@ -131,30 +126,3 @@
 <p>2016 &copy; STTMI Bandung Powered By Ukuranmu Studio</p>
 </footer>
 <!-- /#footer -->
-<!-- #helpModal -->
-<div id="helpModal" class="modal fade">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Modal title</h4>
-        </div>
-        <div class="modal-body">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-    </div>
-    <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<!-- /#helpModal -->

@@ -41,7 +41,7 @@ class Profil extends CI_Controller {
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
-		$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		$config['full_path']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
 		$this->upload->initialize($config);
 
 		$this->load->library('upload', $config);
@@ -51,12 +51,12 @@ class Profil extends CI_Controller {
 			$this->load->view('profil', $error);
 		}else{
 			$gbr = $this->upload->data();
-			$data = array('foto_ketua' =>$gbr['file_name']);
+			$data = array('foto_ketua' =>$gbr['full_path']);
 				$condition['profil_id'] = $this->input->post('profil_id'); //Digunakan untuk melakukan validasi terhadap produk mana yang akan diupdate nantinya
 
 				$this->profil_model->editprofil_proses($data, $condition); //passing variable $data ke products_model
 
-				$this->session->set_flashdata('message', '1');
+				$this->session->set_flashdata('message', 'edit');
 				redirect('profil'); //redirect page ke halaman utama controller products
 		}
 
@@ -78,7 +78,7 @@ class Profil extends CI_Controller {
 
 				$this->profil_model->editprofil_proses($data, $condition); //passing variable $data ke products_model
 
-				$this->session->set_flashdata('message', '1');
+				$this->session->set_flashdata('message', 'edit');
 				redirect('profil'); //redirect page ke halaman utama controller products
 
 

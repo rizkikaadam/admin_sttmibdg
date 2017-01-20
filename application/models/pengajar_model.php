@@ -39,8 +39,10 @@ class pengajar_model extends CI_Model
     $this->db->update('tbl_dosen', $data); //Melakukan update terhadap table msProduct sesuai dengan data yang telah diterima dari controller
 	}
 
-	function deleteProduct($id)
+	function hapus_proses($dosen_id)
 	{
 		//delete produk berdasarkan id
+    $this->db->where('dosen_id', $dosen_id);
+    $this->db->delete('tbl_dosen');
 	}
 }

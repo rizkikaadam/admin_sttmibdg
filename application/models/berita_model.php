@@ -32,10 +32,10 @@ class berita_model extends CI_Model
 		return $this->db->get();
 	}
 
-	function editberita_proses($data,$agenda_id)
+	function editberita_proses($data,$berita_id)
 	{
-		$this->db->where('agenda_id', $agenda_id);
-    $this->db->update('tbl_agenda', $data);
+		$this->db->where('berita_id', $berita_id);
+    $this->db->update('tbl_berita', $data);
 	}
 
 	function tambahfoto_proses($data)

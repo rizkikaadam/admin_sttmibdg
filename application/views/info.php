@@ -5,14 +5,14 @@
                             <div class="col-lg-12">
                                 <div class="box">
                                   <header>
-                                    <h5><i class="glyphicon glyphicon-calendar"></i>&nbsp;Data Agenda</h5>
+                                    <h5><i class="glyphicon glyphicon-calendar"></i>&nbsp;Data info</h5>
                                       <div class="toolbar">
                                         <a data-toggle="modal" data-original-title="Help" data-placement="bottom"
                                            href="#tambah" class="btn btn-primary btn-sm btn-rect" >  <i class="glyphicon glyphicon-edit"></i> Tambah</a>
                                       </div>
                                   </header>
                                     <?php
-                                    $jumlah_data=$agenda->num_rows();
+                                    $jumlah_data=$info->num_rows();
                                     if ($jumlah_data==0) {
                                       echo "Data Belum Terisi";
                                     }
@@ -35,36 +35,32 @@
                                           <thead>
                                               <tr>
                                                   <th>No</th>
-                                                  <th>Agenda</th>
-                                                  <th>Deskripsi</th>
-                                                  <th>Tempat</th>
-                                                  <th>Prodi</th>
+                                                  <th>info</th>
                                                   <th>Tanggal</th>
+                                                  <th>Deskripsi</th>
                                                   <th>Manage</th>
                                               </tr>
                                           </thead>
                                           <tbody>
                                             <?php
                                             $no=0;
-                                            foreach ($agenda->result() as $data_agenda) {
+                                            foreach ($info->result() as $data_info) {
                                               $no++;
                                              ?>
                                               <tr>
                                                   <td><?php echo "$no"; ?></td>
-                                                  <td><?php echo $data_agenda->agenda_judul; ?></td>
-                                                  <td><?php echo $data_agenda->agenda_deskripsi; ?></td>
-                                                  <td><?php echo $data_agenda->agenda_tempat; ?></td>
-                                                  <td><?php echo $data_agenda->agenda_prodi; ?></td>
-                                                  <td><?php echo $data_agenda->agenda_tanggal; ?></td>
-                                                  <td><a href="<?php echo base_url() ?>agenda/edit_agenda/<?php echo $data_agenda->agenda_id; ?>" class="btn btn-primary btn-sm btn-rect" alt="edit data profil">  <i class="glyphicon glyphicon-edit"></i> edit</a>
-                                                    <a href="<?php echo base_url() ?>agenda/hapus_agenda/<?php echo $data_agenda->agenda_id; ?>" class="btn btn-danger btn-sm btn-rect" alt="edit data profil">  <i class="glyphicon glyphicon-edit"></i> hapus</a>
+                                                  <td><?php echo $data_info->info_judul; ?></td>
+                                                  <td><?php echo $data_info->info_tanggal; ?></td>
+                                                  <td><?php echo $data_info->info_deskripsi; ?></td>
+                                                  <td><a href="<?php echo base_url() ?>info/edit_info/<?php echo $data_info->info_id; ?>" class="btn btn-primary btn-sm btn-rect" alt="edit data profil">  <i class="glyphicon glyphicon-edit"></i> edit</a>
+                                                    <a href="<?php echo base_url() ?>info/hapus_info/<?php echo $data_info->info_id; ?>" class="btn btn-danger btn-sm btn-rect" alt="edit data profil">  <i class="glyphicon glyphicon-edit"></i> hapus</a>
                                                   </td>
                                               </tr>
-                                              <?php }//akhir menampilkan agenda ?>
+                                              <?php }//akhir menampilkan info ?>
                                           </tbody>
                                         </table>
                                     </div>
-                                    <?php }//akhir menghitung agenda ?>
+                                    <?php }//akhir menghitung info ?>
                                 </div>
 
                                 <br/>
@@ -153,7 +149,7 @@
             </footer>
             <!-- /#footer -->
             <!-- #helpModal -->
-            <div id="helpModal" class="modal fade">
+            <div id="tambah" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -161,16 +157,32 @@
                             <h4 class="modal-title">Modal title</h4>
                         </div>
                         <div class="modal-body">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <form class="form-horizontal" method="post" action="<?= base_url() ?>info/tambah_proses" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="text1" class="control-label col-lg-4">Judul info</label>
+
+                                <div class="col-lg-8">
+                                    <input type="text" id="text1" name="info_judul" class="form-control" >
+                                </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                            <div class="form-group">
+                                <label for="text1" class="control-label col-lg-4">Deskripsi</label>
+
+                                <div class="col-lg-8">
+                                    <textarea class="form-control" name="info_deskripsi"></textarea>
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                               <label for="text1" class="control-label col-lg-4"></label>
+                                 <div class="col-lg-8">
+                                   <input type="hidden" name="info_id"  id="text1" placeholder="Isi Banyak Mahasiswa" class="form-control" >
+                                     <button type="submit" name="btn simpan" class="btn btn-primary">Simpan</button>
+                                 </div>
+                             </div>
+                         </form>
                         </div>
                     </div>
                     <!-- /.modal-content -->

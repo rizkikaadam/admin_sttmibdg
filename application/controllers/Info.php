@@ -1,17 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Agenda extends CI_Controller {
+class Info extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
+		date_default_timezone_set( 'Asia/Jakarta' );
 		if($this->session->userdata('status') != "login"){
 			$this->session->set_flashdata('message', '0');
 			redirect('login');
 		}
 		$this->load->database();
+		$this->load->helper('date');
 		$this->load->library('session');
-		$this->load->model("agenda_model"); //constructor yang dipanggil ketika memanggil profil.php untuk melakukan pemanggilan pada model : profil_model.php yang ada di folder models
+		$this->load->model("info_model"); //constructor yang dipanggil ketika memanggil profil.php untuk melakukan pemanggilan pada model : profil_model.php yang ada di folder models
 	}
 
 	public function index()
@@ -19,61 +21,64 @@ class Agenda extends CI_Controller {
 		$this->load->view('header.php');
 		$this->load->view('top.php');
 		$this->load->view('left.php');
-		$data['agenda'] = $this->agenda_model->tampil_agenda(); //berisi dari return value pada function getAllProducts() di file models/products_model.php
-		$this->load->view('agenda.php',$data);
-		$this->load->view('modal_agenda.php');
+		$data['info'] = $this->info_model->tampil_info(); //berisi dari return value pada function getAllProducts() di file models/products_model.php
+		$this->load->view('info.php',$data);
+		//$this->load->view('modal_info.php');
 		$this->load->view('bawah.php');
 	}
 
 	public function tambah_proses()
 	{
 
+			$datestring = '%Y-%m-%d %h:%i:%s';
+			$time = time();
+			$human= mdate($datestring, $time);
 			$data = array(
-									'agenda_judul'=>$this->input->post('agenda_judul'),
-									'agenda_deskripsi'=>$this->input->post('agenda_deskripsi'),
-									'agenda_tempat'=>$this->input->post('agenda_tempat'),
-									'agenda_prodi'=>$this->input->post('agenda_prodi'),
-									'agenda_tanggal'=>$this->input->post('agenda_tanggal')
+									'info_judul'=>$this->input->post('info_judul'),
+									'info_deskripsi'=>$this->input->post('info_deskripsi'),
+									'info_tanggal'=>$human
 								);
 
-				$this->agenda_model->tambah_proses($data); //passing variable $data ke products_model
+				$this->info_model->tambah_proses($data); //passing variable $data ke products_model
 
 				$this->session->set_flashdata('message', 'tambah');
-				redirect('Agenda'); //redirect page ke halaman utama controller products
+				redirect('info'); //redirect page ke halaman utama controller products
 	}
 
-	public function hapus_agenda($agenda_id)
+	public function hapus_info($info_id)
 	{
-				$this->agenda_model->hapus_agenda($agenda_id); //passing variable $data ke products_model
+				$this->info_model->hapus_info($info_id); //passing variable $data ke products_model
 
 				$this->session->set_flashdata('message', 'hapus');
-				redirect('Agenda'); //redirect page ke halaman utama controller products
+				redirect('info'); //redirect page ke halaman utama controller products
 	}
 
-	public function edit_agenda($agenda_id){
+	public function edit_info($info_id){
 		$this->load->view('header.php');
 		$this->load->view('top.php');
 		$this->load->view('left.php');
-		$data['agenda'] = $this->agenda_model->edit_agenda($agenda_id); //berisi dari return value pada function getAllProducts() di file models/products_model.php
-		$this->load->view('edit_agenda.php',$data);
+		$data['info'] = $this->info_model->edit_info($info_id); //berisi dari return value pada function getAllProducts() di file models/products_model.php
+		$this->load->view('edit_info.php',$data);
 		$this->load->view('bawah.php');
 	}
 
-	public function editagenda_proses()
+	public function editinfo_proses()
 	{
+
+		$datestring = '%Y-%m-%d %h:%i:%s';
+		$time = time();
+		$human= mdate($datestring, $time);
 		$data = array(
-			'agenda_judul'=>$this->input->post('agenda_judul'),
-			'agenda_deskripsi'=>$this->input->post('agenda_deskripsi'),
-			'agenda_tempat'=>$this->input->post('agenda_tempat'),
-			'agenda_prodi'=>$this->input->post('agenda_prodi'),
-			'agenda_tanggal'=>$this->input->post('agenda_tanggal')
+			'info_judul'=>$this->input->post('info_judul'),
+			'info_deskripsi'=>$this->input->post('info_deskripsi'),
+			'info_tanggal'=>$human
 							);
 
-		$agenda_id=$this->input->post('agenda_id');
-		$this->agenda_model->editagenda_proses($data,$agenda_id); //passing variable $data ke products_model
+		$info_id=$this->input->post('info_id');
+		$this->info_model->editinfo_proses($data,$info_id); //passing variable $data ke products_model
 
 		$this->session->set_flashdata('message', 'edit');
-		redirect('agenda'); //redirect page ke halaman utama controller products
+		redirect('info'); //redirect page ke halaman utama controller products
 	}
 
 	/*

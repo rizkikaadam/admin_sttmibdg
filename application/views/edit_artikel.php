@@ -32,7 +32,7 @@
                           <div class="form-group">
                               <label for="text1" class="control-label col-lg-2">Penulis</label>
                               <div class="col-lg-8">
-                                  <input type="text" name="penulis" value="<?php echo "$penulis"; ?>"/>
+                                  <input type="text" name="artikel_penulis" value="<?php echo "$penulis"; ?>"/>
                               </div>
                           </div>
                           <div class="form-group">

@@ -24,6 +24,16 @@
                                       echo "Data Belum Terisi";
                                     }
                                     else {
+                                      $pesan=$this->session->flashdata('message');
+                                      if ($pesan == "edit") {
+                                        echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                      }
+                                      elseif ($pesan == "hapus") {
+                                        echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                      }
+                                      elseif ($pesan == "tambah") {
+                                        echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                                      }
                                      ?>
                                     <div id="borderedTable" class="body collapse in">
                                       <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">

@@ -18,12 +18,19 @@
                           $jumlah_data=$foto->num_rows();
                           if ($jumlah_data==0) {
                             echo "Data Belum Terisi";
+                            $id=$album_id;
                           }
                           else {
-                           $pesan=$this->session->flashdata('message');
-                           if ($pesan == "1") {
-                             echo "<p class='bg-info'>Data Berhasil Ditambahkan</p>";
-                           }
+                            $pesan=$this->session->flashdata('message');
+                            if ($pesan == "edit") {
+                              echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                            }
+                            elseif ($pesan == "hapus") {
+                              echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                            }
+                            elseif ($pesan == "tambah") {
+                              echo "<p class='bg-info'>Data Berhasil Diubah</p>";
+                            }
                            ?>
                             <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
                                 <thead>
@@ -39,15 +46,18 @@
                                   <?php
                                         //<td><img src='assets/gambar/$data_foto->foto' width='100' /></td>
                                         foreach ($foto->result() as $data_foto) {
-                                          $album_id=$data_foto->album_id;
+                                          $id=$data_foto->album_id;
                                           echo "<tr>
                                               <td>$data_foto->foto_id</td>
                                               <td>$data_foto->foto_nama</td>
                                               <td>$data_foto->foto_tanggal</td>
+                                              ";
+                                          ?>
                                               <td>
-                                                  <a href='album/hapus_foto/$data_foto->foto_id/$data_foto->album_id' class='btn btn-danger btn-sm'>  <i class='glyphicon glyphicon-trash'></i>&nbsp;Hapus</a>
+                                                  <a href='<?php echo base_url(); ?>album/hapusfoto_proses/<?php echo "$data_foto->foto_id/$data_foto->album_id"; ?>' class='btn btn-danger btn-sm'>  <i class='glyphicon glyphicon-trash'></i>&nbsp;Hapus</a>
                                               </td>
                                           </tr>";
+                                          <?php
                                         }// akhir menampilkan data foto
                                    ?>
                                 </tbody>
@@ -145,7 +155,7 @@
                       <div class="form-group">
                         <label for="text1" class="control-label col-lg-2"></label>
                           <div class="col-lg-8">
-                              <input name="album_id" type="hidden" value="<?php echo $album_id; ?>"/>
+                              <input name="album_id" type="hidden" value="<?php echo $id; ?>"/>
                               <button type="submit" name="btn simpan" class="btn btn-primary">Simpan</button>
                           </div>
                       </div>

@@ -3,21 +3,21 @@
         <div class="user-media-toggleHover">
             <span class="fa fa-user"></span>
         </div>
-        <div class="user-wrapper bg-dark">
+        <!--<div class="user-wrapper bg-dark">
             <a class="user-link" href="">
                 <img class="media-object img-thumbnail user-img" alt="User Picture" src="assets/img/user.gif">
             </a>
-        </div>
+        </div>-->
     </div>
     <!-- #menu -->
     <ul id="menu" class="bg-blue dker">
               <li class="nav-header">Menu</li>
               <li class="nav-divider"></li>
-              <li class="">
+              <!--<li class="">
                 <a href="index.php">
                   <i class="glyphicon glyphicon-dashboard"></i><span class="link-title">&nbsp;Dashboard</span>
                 </a>
-              </li>
+              </li>-->
               <li class="">
                 <a href="<?php echo base_url(); ?>profil">
                   <i class="glyphicon glyphicon-home"></i><span class="link-title">&nbsp;Profil</span>
@@ -79,6 +79,11 @@
                         <i class="glyphicon glyphicon-book"></i>&nbsp; Lainnya </a>
                     </li>
                   </ul>
+              </li>
+              <li class="">
+                <a href="<?php echo base_url(); ?>info">
+                  <i class="glyphicon glyphicon-info-sign"></i><span class="link-title">&nbsp;Info</span>
+                </a>
               </li>
               <li class="">
                 <a href="<?php echo base_url(); ?>agenda">

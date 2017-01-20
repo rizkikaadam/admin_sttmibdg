@@ -45,12 +45,12 @@ class Artikel extends CI_Controller {
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
-		//$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		//$config['full_path']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
 		$this->upload->initialize($config);
 
 		$this->load->library('upload', $config);
 
-		if ( ! $this->upload->do_upload('foto_nama')){
+		if ( ! $this->upload->do_upload('artikel_foto')){
 			$error = array('error' => $this->upload->display_errors());
 			redirect('artikel/lihat_artikel/'.$dosen_id);
 		}else{
@@ -58,9 +58,9 @@ class Artikel extends CI_Controller {
 			$data = array(
 					'artikel_judul' => $this->input->post('artikel_judul'),
 					'artikel_isi' => $this->input->post('artikel_isi'),
-					'artikel_penulis' => $this->input->post('artikel_penulis'),
+					'penulis' => $this->input->post('artikel_penulis'),
 					'artikel_tanggal' => $human,
-					'artikel_foto' => $gbr['file_name']
+					'artikel_foto' => $gbr['full_path']
 				);
 			}
 
@@ -90,15 +90,15 @@ class Artikel extends CI_Controller {
 		$data = array(
 			'artikel_judul' => $this->input->post('artikel_judul'),
 			'artikel_isi' => $this->input->post('artikel_isi'),
-			'artikel_penulis' => $this->input->post('artikel_penulis'),
+			'penulis' => $this->input->post('artikel_penulis'),
 			'artikel_tanggal' => $human
 		);
 
 		$condition['artikel_id'] = $this->input->post('artikel_id'); //Digunakan untuk melakukan validasi terhadap produk mana yang akan diupdate nantinya
 
-		$this->artikel_model->editartikel_proses($data, $condition); //passing variable $data ke products_model
+		$this->artikel_model->editartikel_proses($data, $this->input->post('artikel_id')); //passing variable $data ke products_model
 
-		$this->session->set_flashdata('message', '1');
+		$this->session->set_flashdata('message', 'edit');
 		redirect('artikel'); //redirect page ke halaman utama controller products
 
 	}
@@ -123,7 +123,7 @@ class Artikel extends CI_Controller {
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
-		//$config['file_name']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
+		//$config['full_path']						= $nmfile; //nama yang terupload nantinya - See more at: http://fabernainggolan.net/upload-image-rename-codeigniter-dan-menyimpan-ke-database#sthash.6jwDptdx.dpuf
 		$this->upload->initialize($config);
 
 		$this->load->library('upload', $config);
@@ -134,7 +134,7 @@ class Artikel extends CI_Controller {
 		}else{
 			$gbr = $this->upload->data();
 			$data = array(
-										'foto_nama' =>$gbr['file_name'],
+										'foto_nama' =>$gbr['full_path'],
 										'foto_tanggal'=>$human,
 										'artikel_id'=>$artikel_id
 									);
